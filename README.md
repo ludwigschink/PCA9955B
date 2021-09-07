@@ -1,2 +1,2 @@
-# PCA9955B
-C++ module for PCA9955BTW i2c controller LED driver for implementing in any (for example embedded) device.
+# PCF8575
+small code for universal using of PCF8575
