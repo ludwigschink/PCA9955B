@@ -1,38 +1,29 @@
 cmake_minimum_required(VERSION 3.1.0)
 
-project(PCA9955B VERSION 0.1 LANGUAGES CXX)
+project(PCA9955B VERSION 0.3 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-#set(CMAKE_AUTOMOC ON)
-#set(CMAKE_AUTORCC ON)
-#set(CMAKE_AUTOUIC ON)
-
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-#find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 find_library(WIRINGPI_LIBRARIES NAMES wiringPi)
 
 set(
-	SOURCES 
-	main.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/PCA9955B_Base.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/PCA9955B.cpp
-	)
+    SOURCES 
+    main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/PCA9955B_Base.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/PCA9955B.cpp
+    )
 
 set(
-	HEADERS
+    HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/inc/PCA9955B_Base.h
     ${CMAKE_CURRENT_SOURCE_DIR}/inc/PCA9955B.h
     )
     
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-#set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC TRUE)
-
-#target_link_libraries(PCF9955B PUBLIC Qt5::Core Qt5::Widgets)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${WIRINGPI_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)

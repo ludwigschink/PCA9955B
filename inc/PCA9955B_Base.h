@@ -1,6 +1,6 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.h
- * 	@version	0.2
+ * 	@version	0.3
  * 	@author		Ludwig Schink
  * 	@date		08.09.2021
  * 	@brief		This file contains the PCA9955B_Base class. Inherit from it, reimplement the virtual
@@ -280,9 +280,11 @@ PCA9955B_Base(uint8_t i2c_address);
 enum interrupt {int_active=0x0,
 				int_inactive=0x1};
 				 
-enum Errors {Errors_InkombatibelI2CAddress=-4,
-			 Errors_ErrorUnknownFlag=-3,
-			 Errors_ErrorUnknown=-2,
+enum Errors {Errors_CouldNotSetOutputEnable=-6,
+			 Errors_InkombatibelI2CAddress=-5,
+			 Errors_ErrorUnknownFlag=-4,
+			 Errors_ErrorUnknown=-3,
+			 Errors_FailedWrite=-2,
 			 Errors_FailedRead=-1,
 			 Errors_NoError=0};
 
@@ -376,21 +378,26 @@ uint8_t buffer[PCA9955B_BUF_LEN];
 pca9955b_header_t *header=(pca9955b_header_t*)buffer;
 
 /**		int i2cRXTX(uint8_t txbuf[],int bytes,bool rxtx)
- * 	@brief	Declared virtual for overriding by inheriting this classstruct {
-	   }__attribute__((packed))typedef 
+ * 	@brief	Declared virtual for overriding by inheriting this class
  * 			You must provide this funtion to access the HW i2c controller.
- * 	@param[uint8_t] txbuf:	txdata to send or fill when receive
- * 	@param[int]		bytes:	number bytes to send
- * 	@param[bool]	rxtx:	read or write*/
+ * 	@param [uint8_t] txbuf:	txdata to send or fill when receive
+ * 	@param [int]		bytes:	number bytes to send
+ * 	@param [bool]	rxtx:	read or write*/
 virtual int i2cRXTX(int addr,uint8_t data[],int bytes,bool rxtx);
 
+/**	int ReadNonIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
+ * 	@brief	Declaring 
+ * 	@param [int]		numtxbytes: Number of Bytes to read.
+ * 	@return [int]		Value < 0 when error, 0 when success.*/
+virtual int SetOutputEnable(uint8_t value);
+
+
 /**		int i2cRXTX(uint8_t txbuf[],int bytes,bool rxtx)
- * 	@brief	Declared virtual for overriding by inheriting this classstruct {
-	   }__attribute__((packed))typedef 
+ * 	@brief	Declared virtual for overriding by inheriting this class
  * 			You must provide this funtion to access the HW i2c controller.
- * 	@param[uint8_t] txbuf:	txdata to send or fill when receive
- * 	@param[int]		bytes:	number bytes to send
- * 	@param[bool]	rxtx:	read or write*/
+ * 	@param [uint8_t] txbuf:	txdata to send or fill when receive
+ * 	@param [int]		bytes:	number bytes to send
+ * 	@param [bool]	rxtx:	read or write*/
 int WriteIncremental(uint8_t reg_addr,uint8_t txdata[],int numtxbytes);
 
 /**	int SendNonIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
@@ -404,15 +411,21 @@ int WriteNonIncremental(uint8_t reg_addr,uint8_t txbyte);
  * 	@brief	todo:
  * 	@param [uint8_t]	reg_addr:	device register address
  * 	@param [uint8_t*]	txdata:		buffer holding bytes to be sended.
- * 	@param [int]		numtxbytes: Number of Bytes to be sended.*/
+ * 	@param [int]		numtxbytes: Number of Bytes to be sended.
+ * 	@return [int]		Number of read bytes or value < 0 when error.*/
 int ReadIncremental(uint8_t reg_addr,uint8_t rxdata[],int numtxbytes); 
 
 /**	int ReadNonIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
  * 	@brief	todo:
  * 	@param [uint8_t]	reg_addr:	device register address
  * 	@param [uint8_t*]	rxdata:		buffer to write the received bytes.
- * 	@param [int]		numtxbytes: Number of Bytes to read.*/
-int ReadNonIncremental(uint8_t reg_addr,uint8_t rxdata[]); 
+ * 	@param [int]		numtxbytes: Number of Bytes to read.
+ * 	@return [int]		Number of read bytes or value < 0 when error.*/
+int ReadNonIncremental(uint8_t reg_addr,uint8_t rxdata[]);
+
+/**	int ClearErrors(void)
+ * 	@brief	Sets 'lasterror' to 0 (Errors_NoErrors)*/
+void ClearErrors(void);
 };
 
 #endif

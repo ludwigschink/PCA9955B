@@ -1,6 +1,6 @@
 /**		PCA9955B PWM LED driver class
  * 	@file		PCA9955B.h
- * 	@version	0.2
+ * 	@version	0.3
  * 	@author		Ludwig Schink
  * 	@date		08.09.2021
  * 	@brief		This file contains the PCA9955B class inherited from PCA9955B. It reimplementes
@@ -11,6 +11,10 @@
 
 #define PCA9955B_DEBUG	//active debug output (for system with iostream support only)
 #define PCA9955B_DEV_ADDR 0x15
+
+#define PCA9955B_OEPIN 0 //wiringpi pin 0 -> GPIO17
+#define PCA9955B_OEPIN_DOWN 1
+#define PCA9955B_OEPIN_UP 0
 
 //includes for getting i2c working on raspberry pi
 #include <linux/i2c-dev.h>
@@ -29,9 +33,15 @@ class PCA9955B : public PCA9955B_Base
 public:
 PCA9955B(void);
 ~PCA9955B(void);
+
 /**		int i2cRXTX(uint8_t,int,bool)
  * 	@brief	Reimplementation for using in raspberry pi. For more information see PCA9955B_Base class*/
 int i2cRXTX(int addr,uint8_t buf[],int bytes,bool rxtx);
+
+/**		int i2cRXTX(uint8_t,int,bool)
+ * 	@brief	Reimplementation for using in raspberry pi. For more information see PCA9955B_Base class*/
+int SetOutputEnable(uint8_t value);
+
 private:
 int file_i2c=0;
 };

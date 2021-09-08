@@ -1,6 +1,6 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.cpp
- * 	@version	0.2
+ * 	@version	0.3
  * 	@author		Ludwig Schink
  * 	@date		08.09.2021
  * 	@brief		This file contains the PCA9955B_Base class method source.*/
@@ -64,6 +64,10 @@ for(int i=0;i<3;i++)
 	}
 #endif
 int ret=i2cRXTX(i2c_dev_address,buffer,2,i2c_write);
+if(ret<0)
+	{
+	lasterror=Errors_FailedWrite;
+	}
 return ret;
 }
 
@@ -87,6 +91,10 @@ for(int i=0;i<numtxbytes+2;i++)
 	}
 #endif
 int ret=i2cRXTX(i2c_dev_address,buffer,numtxbytes,i2c_write);
+if(ret<0)
+	{
+	lasterror=Errors_FailedWrite;
+	}
 return ret;
 } 
 
@@ -110,6 +118,10 @@ if(ret>0)
 	std::cout << "Received bytes: " << ret << "\n";
 	#endif
 	*rxbyte=buffer[1+2];
+	}
+else if(ret<0)
+	{
+	lasterror=Errors_FailedRead;
 	}
 return ret;
 }
@@ -139,4 +151,14 @@ if(ret>0)
 		}
 	}
 return ret;
+}
+
+int PCA9955B_Base::SetOutputEnable(uint8_t value)
+{
+return 0;
+}
+
+void PCA9955B_Base::ClearErrors(void)
+{
+lasterror=Errors_NoError;
 }
