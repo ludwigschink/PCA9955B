@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver class
  * 	@file		PCA9955B.h
- * 	@version	0.3
+ * 	@version	0.5
  * 	@author		Ludwig Schink
- * 	@date		08.09.2021
+ * 	@date		08.12.2021
  * 	@brief		This file contains the PCA9955B class inherited from PCA9955B. It reimplementes
  * 				the virtual functions of PCA9955B_Base for using on raspberry pi 3B+.*/
 

@@ -8,7 +8,7 @@
 
 /**		PCA9955B example program
  * 	@file		main.cpp
- * 	@version	0.3
+ * 	@version	0.5
  * 	@author		Ludwig Schink
  * 	@date		08.12.2021
  * 	@brief		Entry point for program.*/
