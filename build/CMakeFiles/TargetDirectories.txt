@@ -1,3 +1,0 @@
-/home/pi/Desktop/Geany_WS/PCA9955B/build/CMakeFiles/rebuild_cache.dir
-/home/pi/Desktop/Geany_WS/PCA9955B/build/CMakeFiles/PCA9955B.dir
-/home/pi/Desktop/Geany_WS/PCA9955B/build/CMakeFiles/edit_cache.dir

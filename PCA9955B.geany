@@ -28,13 +28,12 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=5
-FILE_NAME_0=55;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fmain.cpp;0;4
-FILE_NAME_1=73;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B.h;0;4
-FILE_NAME_2=75;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B.cpp;0;4
-FILE_NAME_3=83;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B_Base.h;0;4
-FILE_NAME_4=85;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B_Base.cpp;0;4
-FILE_NAME_5=374;CMake;0;EUTF-8;2;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2FCMakeLists.txt;0;4
+current_page=3
+FILE_NAME_0=59;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fmain.cpp;0;4
+FILE_NAME_1=1729;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B.h;0;4
+FILE_NAME_2=513;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B.cpp;0;4
+FILE_NAME_3=6856;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B_Base.h;0;4
+FILE_NAME_4=3916;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B_Base.cpp;0;4
 
 [VTE]
 last_dir=/home/pi/Desktop/Geany_WS/PCA9955B/build

@@ -42,6 +42,19 @@ int i2cRXTX(int addr,uint8_t buf[],int bytes,bool rxtx);
  * 	@brief	Reimplementation for using in raspberry pi. For more information see PCA9955B_Base class*/
 int SetOutputEnable(uint8_t value);
 
+/**
+ * 	@brief	ExampleFunction for setting LEDOUTX register
+ * 	@param [LEDOUTX_t]	ledout: A setted LEDOUTX_t object.*/
+int SetLEDOUT0(LEDOUT0_t ledout);
+int SetLEDOUT1(LEDOUT1_t ledout);
+int SetLEDOUT2(LEDOUT2_t ledout);
+int SetLEDOUT3(LEDOUT3_t ledout);
+
+/**
+ * 	@brief	ExampleFunction for setting LEDOUTX register
+ * 	@param [LEDOUTX_t]	ledout: A setted LEDOUTX_t object.*/
+int SetIREFALL(IREFALL_t irefall);
+
 private:
 int file_i2c=0;
 };

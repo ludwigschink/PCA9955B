@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.h
- * 	@version	0.3
+ * 	@version	0.5
  * 	@author		Ludwig Schink
- * 	@date		08.09.2021
+ * 	@date		08.12.2021
  * 	@brief		This file contains the PCA9955B_Base class. Inherit from it, reimplement the virtual
  * 				functions and you can use the PCA9955B on every platform.*/
 
@@ -51,7 +51,7 @@
 #define PCA9955B_ERRX_DNE	 0b11
 
 #include <cstdint>
-//todo: beschreibung der register einfügen
+/** @brief MODE1_t register structure typedef.*/
 struct {
 	   unsigned ALLCALL : 1;
 	   unsigned SUB3	: 1;
@@ -62,6 +62,7 @@ struct {
 	   unsigned AIF		: 1;
 	   }__attribute__((packed))typedef MODE1_t;
 
+/** @brief MODE2_t register structure typedef.*/
 struct {
 	   unsigned RESERVED : 2;
 	   unsigned EXP_EN   : 1;
@@ -72,6 +73,7 @@ struct {
 	   unsigned OVERTEMP : 1;
 	   }__attribute__((packed))typedef MODE2_t;
 
+/** @brief LEDOUT0_t register structure typedef.*/
 struct {
 	   unsigned LDR0 : 2;
 	   unsigned LDR1 : 2;
@@ -79,6 +81,7 @@ struct {
 	   unsigned LDR3 : 2;
 	   }__attribute__((packed))typedef LEDOUT0_t; 
 
+/** @brief LEDOUT1_t register structure typedef.*/
 struct {
 	   unsigned LDR4 : 2;
 	   unsigned LDR5 : 2;
@@ -86,6 +89,7 @@ struct {
 	   unsigned LDR7 : 2;
 	   }__attribute__((packed))typedef LEDOUT1_t; 
 
+/** @brief LEDOUT2_t register structure typedef.*/
 struct {
 	   unsigned LDR8 : 2;
 	   unsigned LDR9 : 2;
@@ -93,6 +97,7 @@ struct {
 	   unsigned LDR11 : 2;
 	   }__attribute__((packed))typedef LEDOUT2_t;
 
+/** @brief LEDOUT3_t register structure typedef.*/
 struct {
 	   unsigned LDR12 : 2;
 	   unsigned LDR13 : 2;
@@ -100,9 +105,12 @@ struct {
 	   unsigned LDR15 : 2;
 	   }__attribute__((packed))typedef LEDOUT3_t;
 
+/** @brief GRPPWM_t register structure typedef.*/
 typedef uint8_t GRPPWM_t;	//default: 0xFF, GRPPWM register, see p.19 in datasheet for more info.
+/** @brief GRPFREQ_t register structure typedef.*/
 typedef uint8_t GRPFREQ_t;	//default: 0x00, GRPFREQ register, see p.20 in datasheet for more info.
 
+/** @brief PWMX_t register structures typedef.*/
 typedef uint8_t PWM0_t;		//PWM0 Individual Duty Cycle
 typedef uint8_t PWM1_t;		//PWM1 Individual Duty Cycle
 typedef uint8_t PWM2_t;		//PWM2 Individual Duty Cycle
@@ -119,7 +127,8 @@ typedef uint8_t PWM12_t;	//PWM12 Individual Duty Cycle
 typedef uint8_t PWM13_t;	//PWM13 Individual Duty Cycle
 typedef uint8_t PWM14_t;	//PWM14 Individual Duty Cycle
 typedef uint8_t PWM15_t;	//PWM15 Individual Duty Cycle
-//todo: test!
+
+/** @brief IREFX_t register structre typedef.*/
 typedef uint8_t IREF0_t; //default: 0x00, LED0 output current setting
 typedef uint8_t IREF1_t; //default: 0x00, LED1 output current setting
 typedef uint8_t IREF2_t; //default: 0x00, LED2 output current setting
@@ -137,18 +146,20 @@ typedef uint8_t IREF13_t; //default: 0x00, LED13 output current setting
 typedef uint8_t IREF14_t; //default: 0x00, LED14 output current setting
 typedef uint8_t IREF15_t; //default: 0x00, LED15 output current setting
 
-
+/** @brief RAMP_RATE_GRPX_t register structre typedef.*/
 struct {
 	   unsigned RAMP_RATE : 6;	//default: 0, Ramp rate value per step is defined from 1 (0x00) to 64 (0x3F), see p.23 in datasheet
 	   unsigned RAMP_DOWN : 1;	//default: 0, Ramp-down enable(1)/disable(0)
 	   unsigned RAMP_UP	  : 1;	//default: 0, Ramp-up enable(1)/disale(0)
 	   }__attribute__((packed))typedef RAMP_RATE_GRPX_t; //default: 0x00, rampe rate control register
 
+/** @brief RAMP_RATE_GRPX_t register structre typedef.*/
 struct {
 	   unsigned MULTIFACTOR : 6; //default 0, Multiple factor per step (p.23)
 	   unsigned CYCLETIME	: 1; //default 0, Cycle time 0.5ms (0)/Cylce time 8ms (1)
 	   }__attribute__((packed))typedef STEP_TIME_GRPX_t; //default: 0x00, step time control register
 
+/** @brief RAMP_RATE_GRPX_t register structre typedef.*/
 struct {
 	   unsigned HOLDOFFTIMESEL : 3;	//default 0, todo: description!
 	   unsigned HOLDONTIMESEL  : 3; //default 0, todo: description!
@@ -156,10 +167,14 @@ struct {
 	   unsigned HOLDON 		   : 1; //default 0, todo: description!
 	   }__attribute__((packed))typedef HOLD_CNTL_GRPX_t; //default 0x00, hold on and off control registers
 
+/** @brief RAMP_RATE_GRPX_t register structre typedef.*/
 typedef uint8_t IREF_GRPX_t; //default: Final and hold ON gain setting registers
+
+/** @brief GRAD_MODE_SEL0_t register structre typedef.*/
 typedef uint8_t GRAD_MODE_SEL0_t; //default: 0x00, Gradiaton mode select registers for channel 0 to 7.
 typedef uint8_t GRAD_MODE_SEL1_t; //default: 0x00, Gradiaton mode select registers for channel 0 to 7.
-   
+
+/** @brief GRAD_GRP_SEL3_0 register structre typedef.*/
 struct {
 	   unsigned GRP_SELECT_LED0 : 2; //default: 0b00, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED1 : 2; //default: 0b00, Gradiation group select for LED0 output.
@@ -167,13 +182,15 @@ struct {
 	   unsigned GRP_SELECT_LED3 : 2; //default: 0b00, Gradiation group select for LED0 output.
 	   }__attribute__((packed))typedef GRAD_GRP_SEL0_t; //default: 0x00, Gradiation group select registers.
 
+/** @brief GRAD_GRP_SEL1_t register structre typedef.*/
 struct {
 	   unsigned GRP_SELECT_LED4 : 2; //default: 0b01, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED5 : 2; //default: 0b01, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED6 : 2; //default: 0b01, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED7 : 2; //default: 0b01, Gradiation group select for LED0 output.
 	   }__attribute__((packed))typedef GRAD_GRP_SEL1_t; //default: 0x55, Gradiation group select registers.
-	   
+
+/** @brief GRAD_GRP_SEL2_t register structre typedef.*/
 struct {
 	   unsigned GRP_SELECT_LED8 : 2; //default: 0b10, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED9 : 2; //default: 0b10, Gradiation group select for LED0 output.
@@ -181,13 +198,15 @@ struct {
 	   unsigned GRP_SELECT_LED11 : 2; //default: 0b10, Gradiation group select for LED0 output.
 	   }__attribute__((packed))typedef GRAD_GRP_SEL2_t; //default: 0xAA, Gradiation group select registers.
 
+/** @brief GRAD_GRP_SEL3_t register structre typedef.*/
 struct {
 	   unsigned GRP_SELECT_LED12 : 2; //default: 0b11, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED13 : 2; //default: 0b11, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED14 : 2; //default: 0b11, Gradiation group select for LED0 output.
 	   unsigned GRP_SELECT_LED15 : 2; //default: 0b11, Gradiation group select for LED0 output.
 	   }__attribute__((packed))typedef GRAD_GRP_SEL3_t; //default: 0xFF, Gradiation group select registers.
-	   
+
+/** @brief GRAD_CNTL_t register structre typedef.*/
 struct {
 	   unsigned SHOT3  : 1; //default: 0, Single shot(0)/continous shot(1) for group 3
 	   unsigned START3 : 1; //default: 0, stop or done(0)/start(1) for group 3
@@ -198,36 +217,44 @@ struct {
 	   unsigned SHOT0  : 1; //default: 0, Single shot(0)/continous shot(1) for group 0
 	   unsigned START0 : 1; //default: 0, stop or done(0)/start(1) for group 0
 	   }__attribute__((packed))typedef GRAD_CNTL_t; //default: 0x00, Gradiation control register
-	   
+
+/** @brief OFFSET_t register structre typedef.*/
 struct {
 	   unsigned FACTOR : 4; //default: 0b1000, LEDn output delay offset value. Documentation for default value is not very clear at this point (p. 30).
 	   unsigned RESERVED: 4; //default: 0b0000, not used
 	   }__attribute__((packed))typedef OFFSET_t; //default: 0x08;
-	   
+
+/** @brief SUBADR1_t register structre typedef.*/
 struct {
 	   unsigned RESERVED    : 1; //default: 0, reserved.
 	   unsigned SUBADDRESS1 : 7; //default: 0x76, sub address 1
 	   }__attribute__((packed))typedef SUBADR1_t; //default: 0xEC, i2c subaddress
 
+/** @brief SUBADR2_t register structre typedef.*/
 struct {
 	   unsigned RESERVED    : 1; //default: 0, reserved.
 	   unsigned SUBADDRESS2 : 7; //default: 0x76, sub address 1
 	   }__attribute__((packed))typedef SUBADR2_t; //default: 0xEC, i2c subaddress
 
+/** @brief SUBADR3_t register structre typedef.*/
 struct {
 	   unsigned RESERVED    : 1; //default: 0, reserved.
 	   unsigned SUBADDRESS3 : 7; //default: 0x76, sub address 1
 	   }__attribute__((packed))typedef SUBADR3_t; //default: 0xEC, i2c subaddress
-	   
+
+/** @brief ALLCALLADR_t register structre typedef.*/
 struct {
 	   unsigned RESERVED : 		 1; //default: 0, reserved.
 	   unsigned ALLCALLADDRESS : 7; //default: 0x70, AllCall i2c bus address
 	   }__attribute__((packed))typedef ALLCALLADR_t; //default: 0xE0, LED All Call i2c-bus address register
-	   
+
+/** @brief PSWMALL_t register structre typedef.*/
 typedef uint8_t PWMALL_t; //default: 0x00, brightness control for all LEDn outputs. Duty Cycle for all LED outputs.
-	   
+
+/** @brief IREFALL_t register structre typedef.*/
 typedef uint8_t IREFALL_t; //default: 0x00, Output gain control for all LED outputs. Current gain setting for all LED outputs.
-	   
+
+/** @brief EFLAG0_t register structre typedef.*/
 struct {
 	   unsigned ERR0 : 2; //default: 0b00, Error status for LED0 output.
 	   unsigned ERR1 : 2; //default: 0b00, Error status for LED1 output.
@@ -235,6 +262,7 @@ struct {
 	   unsigned ERR3 : 2; //default: 0b00, Error status for LED3 output.
 	   }__attribute__((packed))typedef EFLAG0_t; //default: 0x00, Error flag registers
 
+/** @brief EFLAG1_t register structre typedef.*/
 struct {
 	   unsigned ERR4 : 2; //default: 0b00, Error status for LED4 output.
 	   unsigned ERR5 : 2; //default: 0b00, Error status for LED5 output.
@@ -242,6 +270,7 @@ struct {
 	   unsigned ERR7 : 2; //default: 0b00, Error status for LED7 output.
 	   }__attribute__((packed))typedef EFLAG1_t; //default: 0x00, Error flag registers
 
+/** @brief EFLAG2_t register structre typedef.*/
 struct {
 	   unsigned ERR8 : 2; //default: 0b00, Error status for LED8 output.
 	   unsigned ERR9 : 2; //default: 0b00, Error status for LED9 output.
@@ -249,6 +278,7 @@ struct {
 	   unsigned ERR11 : 2; //default: 0b00, Error status for LED11 output.
 	   }__attribute__((packed))typedef EFLAG2_t; //default: 0x00, Error flag registers
 
+/** @brief EFLAG3_t register structre typedef.*/
 struct {
 	   unsigned ERR12 : 2; //default: 0b00, Error status for LED12 output.
 	   unsigned ERR13 : 2; //default: 0b00, Error status for LED13 output.
@@ -256,21 +286,26 @@ struct {
 	   unsigned ERR15 : 2; //default: 0b00, Error status for LED15 output.
 	   }__attribute__((packed))typedef EFLAG3_t; //default: 0x00, Error flag registers
 
+/** @brief i2c_header_t register structre typedef.*/
 struct {
        unsigned readwrite :		1;	   
 	   unsigned address	  :		7;
        }__attribute__((packed)) typedef i2c_header_t;
 
+/** @brief control_t register structre typedef.*/
 struct {
 	   unsigned D	: 7; //default: 0x00, register address.
 	   unsigned AIF	: 1; //default: todo: herausfinden
 	   } __attribute__((packed)) typedef control_t; //default: todo: herausfinden, Control register.
 
+/** @brief pca9955b_header_t register structre typedef.*/
 struct {
 	   i2c_header_t i2c_header;
 	   control_t control;
 	   }__attribute__((packed))typedef pca9955b_header_t;
-
+/**
+ * 	@brief	PCA9955B_Base class. This class provides basically the implementation for accessing the PCA9955B
+ * 			device.*/
 class PCA9955B_Base
 {
 public:
@@ -281,7 +316,7 @@ enum interrupt {int_active=0x0,
 				int_inactive=0x1};
 				 
 enum Errors {Errors_CouldNotSetOutputEnable=-6,
-			 Errors_InkombatibelI2CAddress=-5,
+			 Errors_IncombatibleI2CAddress=-5,
 			 Errors_ErrorUnknownFlag=-4,
 			 Errors_ErrorUnknown=-3,
 			 Errors_FailedWrite=-2,

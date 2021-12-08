@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.cpp
- * 	@version	0.3
+ * 	@version	0.4
  * 	@author		Ludwig Schink
- * 	@date		08.09.2021
+ * 	@date		08.12.2021
  * 	@brief		This file contains the PCA9955B_Base class method source.*/
 
 #include <cstring>
@@ -23,7 +23,7 @@ if(i2c_address<=0x7D)
 	i2c_dev_address=i2c_address;
 	}
 else {
-	 lasterror=Errors_InkombatibelI2CAddress;
+	 lasterror=Errors_IncombatibleI2CAddress;
 	 #ifdef PCA9955B_DEBUG
 	 std::cout << "ERR: invalid i2c device address";
 	 #endif
@@ -155,6 +155,9 @@ return ret;
 
 int PCA9955B_Base::SetOutputEnable(uint8_t value)
 {
+#ifdef PCA9955B_DEBUG
+std::cout << "SetOutputEnable(): value=" << value << "\n";
+#endif
 return 0;
 }
 
