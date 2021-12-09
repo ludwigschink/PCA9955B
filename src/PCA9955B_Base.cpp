@@ -1,6 +1,6 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.cpp
- * 	@version	0.6
+ * 	@version	0.7
  * 	@author		Ludwig Schink
  * 	@date		09.12.2021
  * 	@brief		This file contains the PCA9955B_Base class method source.*/
@@ -57,14 +57,14 @@ header->i2c_header.address=i2c_dev_address;
 header->i2c_header.readwrite=i2c_write;
 header->control.D=reg_addr;
 header->control.AIF=PCA9955B_NONINCREMENT;
-buffer[2+1]=txbyte;
+buffer[2]=txbyte;
 #ifdef PCA9955B_DEBUG
 for(int i=0;i<3;i++)
 	{
 	std::cout << "buffer[" << i << "]=" << std::hex << (int)buffer[i] << "\n";
 	}
 #endif
-int ret=i2cRXTX(i2c_dev_address,buffer,2,i2c_write);
+int ret=i2cRXTX(i2c_dev_address,buffer,3,i2c_write);
 if(ret<0)
 	{
 	lasterror=Errors_FailedWrite;
@@ -76,7 +76,7 @@ int PCA9955B_Base::WriteIncremental(uint8_t reg_addr,uint8_t txdata[],int numtxb
 {
 memset(buffer,0,PCA9955B_BUF_LEN);
 #ifdef PCA9955B_DEBUG
-std::cout << "DEBUG: In WriteNonIncremental\n";
+std::cout << "DEBUG: In WriteIncremental():" << std::endl;
 #endif
 header->i2c_header.address=i2c_dev_address;
 header->i2c_header.readwrite=i2c_write;
@@ -89,10 +89,10 @@ for(int i=0;i<numtxbytes;i++)
 #ifdef PCA9955B_DEBUG
 for(int i=0;i<numtxbytes+2;i++)
 	{
-	std::cout << "buffer[" << i << "]=" << std::hex << (int)buffer[i] << "\n";
+	std::cout << "buffer[" << i << "]=" << std::hex << (int)buffer[i] << std::endl;
 	}
 #endif
-int ret=i2cRXTX(i2c_dev_address,buffer,numtxbytes,i2c_write);
+int ret=i2cRXTX(i2c_dev_address,buffer,numtxbytes+2,i2c_write);
 if(ret<0)
 	{
 	lasterror=Errors_FailedWrite;
@@ -110,17 +110,16 @@ header->i2c_header.address=i2c_dev_address;
 header->i2c_header.readwrite=i2c_write;
 header->control.D=reg_addr;
 header->control.AIF=PCA9955B_NONINCREMENT;
-	#ifdef PCA9955B_DEBUG
-	std::cout << "buffer[0]=" << std::hex << (int)buffer[0] << "\n";
-	std::cout << "buffer[1]=" << std::hex << (int)buffer[1] << "\n";
-	#endif
-int ret=i2cRXTX(i2c_dev_address,buffer,1+2,i2c_read);
+
+int ret=i2cRXTX(i2c_dev_address,buffer,3,i2c_read);
 if(ret>0)
 	{
-	#ifdef PCA9955B_DEBUG
-	std::cout << "Received bytes: " << ret << "\n";
-	#endif
-	*rxbyte=buffer[1+1];//todo: mit markos oder so machen
+		#ifdef PCA9955B_DEBUG
+		std::cout << "buffer[0]=" << std::hex << (int)buffer[0] << std::endl;
+		std::cout << "buffer[1]=" << std::hex << (int)buffer[1] << std::endl;
+		std::cout << "buffer[2]=" << std::hex << (int)buffer[2] << std::endl;
+		#endif
+	*rxbyte=buffer[2];
 	}
 else if(ret<0)
 	{
@@ -146,9 +145,9 @@ header->control.AIF=PCA9955B_INCREMENT;
 int ret=i2cRXTX(i2c_dev_address,buffer,numrxbytes+2,i2c_read);
 if(ret>0)
 	{
-	#ifdef PCA9955B_DEBUG
-	std::cout << "Received bytes: " << ret << "\n";
-	#endif
+		#ifdef PCA9955B_DEBUG
+		std::cout << "Received bytes: " << ret << "\n";
+		#endif
 	for(int i=0;i<ret;i++)
 		{
 		rxdata[i]=buffer[i+2];
@@ -159,13 +158,20 @@ return ret;
 
 int PCA9955B_Base::SetOutputEnable(uint8_t value)
 {
-#ifdef PCA9955B_DEBUG
-std::cout << "SetOutputEnable(): value=" << value << "\n";
-#endif
+	#ifdef PCA9955B_DEBUG
+	std::cout << "SetOutputEnable(): value=" << value << "\n";
+	#endif
 return 0;
 }
 
-void PCA9955B_Base::ClearErrors(void)
+void PCA9955B_Base::ClearLastError(void)
 {
 lasterror=Errors_NoError;
 }
+
+int PCA9955B_Base::GetLastError(void)
+{
+return lasterror;
+}
+
+

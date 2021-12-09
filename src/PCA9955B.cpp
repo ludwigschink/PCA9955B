@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver class
  * 	@file		PCA9955B.cpp
- * 	@version	0.5
+ * 	@version	0.6
  * 	@author		Ludwig Schink
- * 	@date		08.12.2021
+ * 	@date		09.12.2021
  * 	@brief		This file contains the PCA9955B class methods inherited from PCA9955B_Base.*/
 
 #include "PCA9955B.h"
@@ -33,27 +33,36 @@ close(file_i2c);
 
 int PCA9955B::i2cRXTX(int addr,uint8_t buf[],int bytes,bool rxtx)
 {
+if(bytes<2)
+	{
+	std::cout << "I2C: incompatible byte count" << std::endl;
+	return PCA9955B_Base::Errors::Errors_IncompatibleByteCount;
+	}
 int ret=0;
 if(rxtx==i2c_read)
 	{
-	ret=write(file_i2c,&buf[1], 1);
-	ret=read(file_i2c, &buf[2], bytes-2);	//todo: hard coded -2 gefällt mir nicht!
-	if (ret != bytes-2)
+	//uncomment for more information!
+	//std::cout << "i2cRXTX(): write: buf[1]=" << std::hex << (int)buf[1] << " ,bytes=" << bytes << std::endl;
+	ret=write(file_i2c,&buf[1], 1);			//&buf[1] because of the skipped address byte (its already sended by write() or read() function)
+	ret=read(file_i2c, &buf[2], bytes-1);
+	if (ret != bytes-1)
 		{
-		std::cout << "I2C: Failed to read from i2c bus. return=" << ret << "\n";
+		std::cout << "I2C: Failed to read from i2c bus. return=" << ret << std::endl;
 		return PCA9955B_Base::Errors::Errors_FailedRead;
 		}
 	}
 else if(rxtx==i2c_write)
 	{
-	ret=write(file_i2c, &buf[1], bytes+1);
-	if (ret != bytes+1)
+	//uncomment for more information!
+	//std::cout << "i2cRXTX(): write: buf[1]=" << std::hex << (int)buf[1] << " ,bytes=" << bytes << std::endl;
+	ret=write(file_i2c, &buf[1], bytes-1);	//&buf[1] because of the skipped address byte (its already sended by write() or read() function)
+	if (ret != bytes-1)
 		{
-		std::cout << "I2C: Failed write to i2c bus. return=" << ret << "\n";
+		std::cout << "I2C: Failed write to i2c bus. return=" << ret << std::endl;
 		return PCA9955B_Base::Errors::Errors_FailedRead;
 		}
 	}
-lasterror=PCA9955B_Base::Errors::Errors_NoError;
+ClearLastError();
 return ret;
 }
 
@@ -69,9 +78,42 @@ else {
 return PCA9955B_Base::Errors::Errors_NoError;
 }
 
-int PCA9955B::SetLEDOUT0(LEDOUT0_t ledout)
+int PCA9955B::SetLEDOUT0(LEDOUT0_t ledout0)
 {
-//uint8_t txbyte=(uint8_t)ledout;
-//WriteNonIncremental(LEDOUT0,txbyte);
-return 0;
+return WriteNonIncremental(LEDOUT0,*((uint8_t*)&ledout0));
+}
+
+int PCA9955B::SetLEDOUT1(LEDOUT1_t ledout1)
+{
+return WriteNonIncremental(LEDOUT1,*((uint8_t*)&ledout1));
+}
+
+int PCA9955B::SetLEDOUT2(LEDOUT2_t ledout2)
+{
+return WriteNonIncremental(LEDOUT2,*((uint8_t*)&ledout2));
+}
+
+int PCA9955B::SetLEDOUT3(LEDOUT3_t ledout3)
+{
+return WriteNonIncremental(LEDOUT3,*((uint8_t*)&ledout3));
+}
+
+int PCA9955B::SetPWM0(PWM0_t pwm0)
+{
+return WriteNonIncremental(PWM0,*((uint8_t*)&pwm0));
+}
+
+int PCA9955B::SetPWM1(PWM0_t pwm1)
+{
+return WriteNonIncremental(PWM1,*((uint8_t*)&pwm1));
+}
+
+int PCA9955B::SetPWM2(PWM0_t pwm2)
+{
+return WriteNonIncremental(PWM2,*((uint8_t*)&pwm2));
+}
+
+int PCA9955B::SetPWM3(PWM0_t pwm3)
+{
+return WriteNonIncremental(PWM3,*((uint8_t*)&pwm3));
 }

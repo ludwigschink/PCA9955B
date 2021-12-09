@@ -1,6 +1,6 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.h
- * 	@version	0.6
+ * 	@version	0.7
  * 	@author		Ludwig Schink
  * 	@date		09.12.2021
  * 	@brief		This file contains the PCA9955B_Base class. Inherit from it, reimplement the virtual
@@ -10,9 +10,10 @@
 #ifndef PCA9955B_BASE_T_H
 #define PCA9955B_BASE_T_H
 
-//#define PCA9955B_DEBUG
+/**	@brief	You can define a global Macro PCA9955B_DEBUG for getting i2c infos while sending and receiving.*/
+#define PCA9955B_DEBUG
 
-#define PCA9955B_BUF_LEN 20
+#define PCA9955B_BUF_LEN 0x50	//50 registers
 
 #define PCA9955B_READ	1
 #define PCA9955B_WRITE	0
@@ -314,22 +315,28 @@ public:
 PCA9955B_Base(uint8_t i2c_address);
 ~PCA9955B_Base(void);
 
+/**	@brief	Interrupt enums.*/
 enum interrupt {int_active=0x0,
 				int_inactive=0x1};
-				 
-enum Errors {Errors_CouldNotSetOutputEnable=-6,
-			 Errors_IncombatibleI2CAddress=-5,
-			 Errors_ErrorUnknownFlag=-4,
-			 Errors_ErrorUnknown=-3,
-			 Errors_FailedWrite=-2,
-			 Errors_FailedRead=-1,
-			 Errors_NoError=0};
+				
+/**	@brief	Error codes.*/
+enum Errors {
+			Errors_IncompatibleByteCount=-7,
+			Errors_CouldNotSetOutputEnable=-6,
+			Errors_IncombatibleI2CAddress=-5,
+			Errors_ErrorUnknownFlag=-4,
+			Errors_ErrorUnknown=-3,
+			Errors_FailedWrite=-2,
+			Errors_FailedRead=-1,
+			Errors_NoError=0
+			};
 
+/**	@brief	enum for access types.*/
 enum PCA9955B_i2c {
 				  i2c_write=0,
 				  i2c_read=1
 				  };
-
+/**	@brief	register addresses.*/
 enum reg_addr {
 			  MODE1=0x00,
 			  MODE2=0x01,
@@ -407,10 +414,6 @@ enum reg_addr {
 			  EFLAG3=0x49,
 			  reg_addr_end
 			  };
-				 
-int8_t lasterror=Errors_NoError;
-uint8_t i2c_dev_address=0;
-uint8_t buffer[PCA9955B_BUF_LEN];
 
 pca9955b_header_t *header=(pca9955b_header_t*)buffer;
 
@@ -445,24 +448,39 @@ int WriteIncremental(uint8_t reg_addr,uint8_t txdata[],int numtxbytes);
 int WriteNonIncremental(uint8_t reg_addr,uint8_t txbyte); 
 
 /**	int ReadIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
- * 	@brief	todo:
- * 	@param [uint8_t]	reg_addr:	device register address
- * 	@param [uint8_t*]	txdata:		buffer holding bytes to be sended.
- * 	@param [int]		numtxbytes: Number of Bytes to be sended.
+ * 	@brief	Reads a number of registers by increasing the register address
+ * 			after every byte read.
+ * 	@param	[uint8_t]	reg_addr:	device register address
+ * 	@param	[uint8_t*]	txdata:		buffer holding bytes to be sended.
+ * 	@param	[int]		numtxbytes: Number of Bytes to be sended.
  * 	@return [int]		Number of read bytes or value < 0 when error.*/
 int ReadIncremental(uint8_t reg_addr,uint8_t rxdata[],int numtxbytes); 
 
 /**	int ReadNonIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
- * 	@brief	todo:
+ * 	@brief	Reads a register byte without increasing the register address.
  * 	@param [uint8_t]	reg_addr:	device register address
  * 	@param [uint8_t*]	rxdata:		buffer to write the received bytes.
  * 	@param [int]		numtxbytes: Number of Bytes to read.
  * 	@return [int]		Number of read bytes or value < 0 when error.*/
 int ReadNonIncremental(uint8_t reg_addr,uint8_t rxdata[]);
 
-/**	int ClearErrors(void)
- * 	@brief	Sets 'lasterror' to 0 (Errors_NoErrors)*/
-void ClearErrors(void);
+/**	void ClearErrors(void)
+ * 	@brief	Sets lasterror to 0 (Errors_NoErrors)*/
+void ClearLastError(void);
+
+/**	void ClearErrors(void)
+ * 	@brief	Return the lasterror.*/
+int GetLastError(void);
+
+
+private:
+/**	@brief the buffer where als transmitted and received data ist stored
+ * while transmission.*/
+uint8_t buffer[PCA9955B_BUF_LEN];
+/**	@brief	An integer holding the last error code*/
+int8_t lasterror=Errors_NoError;
+/**	@brief An unsigned byte holding the i2c address.*/
+uint8_t i2c_dev_address=0;
 };
 
 #endif
