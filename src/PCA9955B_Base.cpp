@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.cpp
- * 	@version	0.5
+ * 	@version	0.6
  * 	@author		Ludwig Schink
- * 	@date		08.12.2021
+ * 	@date		09.12.2021
  * 	@brief		This file contains the PCA9955B_Base class method source.*/
 
 #include <cstring>
@@ -49,6 +49,7 @@ return Errors_NoError;
 
 int PCA9955B_Base::WriteNonIncremental(uint8_t reg_addr,uint8_t txbyte)
 {
+memset(buffer,0,PCA9955B_BUF_LEN);
 #ifdef PCA9955B_DEBUG
 std::cout << "DEBUG: In WriteNonIncremental\n";
 #endif
@@ -73,6 +74,7 @@ return ret;
 
 int PCA9955B_Base::WriteIncremental(uint8_t reg_addr,uint8_t txdata[],int numtxbytes)
 {
+memset(buffer,0,PCA9955B_BUF_LEN);
 #ifdef PCA9955B_DEBUG
 std::cout << "DEBUG: In WriteNonIncremental\n";
 #endif
@@ -100,6 +102,7 @@ return ret;
 
 int PCA9955B_Base::ReadNonIncremental(uint8_t reg_addr,uint8_t *rxbyte)
 {
+memset(buffer,0,PCA9955B_BUF_LEN);
 	#ifdef PCA9955B_DEBUG
 	std::cout << "DEBUG: in ReadNonIncremental\n";
 	#endif
@@ -117,7 +120,7 @@ if(ret>0)
 	#ifdef PCA9955B_DEBUG
 	std::cout << "Received bytes: " << ret << "\n";
 	#endif
-	*rxbyte=buffer[1+2];
+	*rxbyte=buffer[1+1];//todo: mit markos oder so machen
 	}
 else if(ret<0)
 	{
@@ -128,6 +131,7 @@ return ret;
 
 int PCA9955B_Base::ReadIncremental(uint8_t reg_addr,uint8_t rxdata[],int numrxbytes)
 {
+memset(buffer,0,PCA9955B_BUF_LEN);
 	#ifdef PCA9955B_DEBUG
 	std::cout << "DEBUG: in ReadNonIncremental\n";
 	#endif

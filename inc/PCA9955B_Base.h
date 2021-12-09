@@ -1,14 +1,16 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.h
- * 	@version	0.5
+ * 	@version	0.6
  * 	@author		Ludwig Schink
- * 	@date		08.12.2021
+ * 	@date		09.12.2021
  * 	@brief		This file contains the PCA9955B_Base class. Inherit from it, reimplement the virtual
  * 				functions and you can use the PCA9955B on every platform.*/
 
 
 #ifndef PCA9955B_BASE_T_H
 #define PCA9955B_BASE_T_H
+
+//#define PCA9955B_DEBUG
 
 #define PCA9955B_BUF_LEN 20
 
