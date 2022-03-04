@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.1.0)
 
-project(PCA9955B VERSION 0.6 LANGUAGES CXX)
+project(PCA9955B VERSION 0.7 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_library(WIRINGPI_LIBRARIES NAMES wiringPi)
+find_library(PIGPIO_LIBRARIES NAMES pigpio)
 
 set(
     SOURCES 
@@ -24,7 +24,7 @@ set(
     
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${WIRINGPI_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${PIGPIO_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 

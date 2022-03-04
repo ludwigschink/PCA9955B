@@ -1,0 +1,57 @@
+\hypertarget{PCA9955B_8h}{}\doxysection{inc/\+PCA9955B.h File Reference}
+\label{PCA9955B_8h}\index{inc/PCA9955B.h@{inc/PCA9955B.h}}
+
+
+This file contains the \mbox{\hyperlink{classPCA9955B}{PCA9955B}} class inherited from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}}. It reimplementes the virtual methods from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}} for using on Raspberry pi 3B+. It is meant as an example for inheriting and reimplementation your own methods.  
+
+
+{\ttfamily \#include $<$linux/i2c-\/dev.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pigpio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}PCA9955\+B\+\_\+\+Base.\+h\char`\"{}}\newline
+Include dependency graph for PCA9955\+B.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classPCA9955B}{PCA9955B}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classPCA9955B}{PCA9955B}} class for raspberry pi inherited from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{PCA9955B_8h_a01cd84ff8bb637e61c6f591034ec735f}\label{PCA9955B_8h_a01cd84ff8bb637e61c6f591034ec735f}} 
+\#define {\bfseries PCA9955\+B\+\_\+\+DEBUG}
+\item 
+\mbox{\Hypertarget{PCA9955B_8h_a36b28dff9718ad32dea5fb0f2bbea843}\label{PCA9955B_8h_a36b28dff9718ad32dea5fb0f2bbea843}} 
+\#define {\bfseries PCA9955\+B\+\_\+\+DEV\+\_\+\+ADDR}~0x15
+\item 
+\mbox{\Hypertarget{PCA9955B_8h_ae03324dc993768bbdf8a5a57bb24cea0}\label{PCA9955B_8h_ae03324dc993768bbdf8a5a57bb24cea0}} 
+\#define {\bfseries PCA9955\+B\+\_\+\+OEPIN}~18
+\item 
+\mbox{\Hypertarget{PCA9955B_8h_a2e3de7f256a4e9524a8bd08c313229cd}\label{PCA9955B_8h_a2e3de7f256a4e9524a8bd08c313229cd}} 
+\#define {\bfseries PCA9955\+B\+\_\+\+OEPIN\+\_\+\+DOWN}~1
+\item 
+\mbox{\Hypertarget{PCA9955B_8h_a2f5a1cb064eaf45ada9d1ef3c728446f}\label{PCA9955B_8h_a2f5a1cb064eaf45ada9d1ef3c728446f}} 
+\#define {\bfseries PCA9955\+B\+\_\+\+OEPIN\+\_\+\+UP}~0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains the \mbox{\hyperlink{classPCA9955B}{PCA9955B}} class inherited from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}}. It reimplementes the virtual methods from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}} for using on Raspberry pi 3B+. It is meant as an example for inheriting and reimplementation your own methods. 
+
+\mbox{\hyperlink{classPCA9955B}{PCA9955B}} PWM LED driver class
+
+\begin{DoxyVersion}{Version}
+0.\+7 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Ludwig Schink 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+04.\+03.\+2022 
+\end{DoxyDate}

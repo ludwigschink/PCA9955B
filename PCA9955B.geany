@@ -28,12 +28,13 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=4
-FILE_NAME_0=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fmain.cpp;0;4
-FILE_NAME_1=2834;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B.h;0;4
-FILE_NAME_2=2898;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B.cpp;0;4
-FILE_NAME_3=730;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B_Base.h;0;4
-FILE_NAME_4=3218;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B_Base.cpp;0;4
+current_page=2
+FILE_NAME_0=254;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fmain.cpp;0;4
+FILE_NAME_1=122;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B.h;0;4
+FILE_NAME_2=124;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B.cpp;0;4
+FILE_NAME_3=463;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Finc%2FPCA9955B_Base.h;0;4
+FILE_NAME_4=226;C++;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2Fsrc%2FPCA9955B_Base.cpp;0;4
+FILE_NAME_5=486;CMake;0;EUTF-8;0;1;0;%2Fhome%2Fpi%2FDesktop%2FGeany_WS%2FPCA9955B%2FCMakeLists.txt;0;4
 
 [VTE]
 last_dir=/home/pi/Desktop/Geany_WS/PCA9955B/build
@@ -52,7 +53,7 @@ NF_03_LB=cmake
 NF_03_CM=cmake ..
 NF_03_WD=%p/build
 EX_00_LB=_Ausführen
-EX_00_CM=./PCA9955B
+EX_00_CM=sudo ./PCA9955B
 EX_00_WD=%p/build
 EX_01_LB=
 EX_01_CM=

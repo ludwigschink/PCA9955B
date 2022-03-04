@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver class
  * 	@file		PCA9955B.cpp
- * 	@version	0.6
+ * 	@version	0.7
  * 	@author		Ludwig Schink
- * 	@date		09.12.2021
+ * 	@date		04.03.2022
  * 	@brief		This file contains the PCA9955B class methods inherited from PCA9955B_Base.*/
 
 #include "PCA9955B.h"
@@ -12,9 +12,8 @@
 PCA9955B::PCA9955B(void)
 : PCA9955B_Base(PCA9955B_DEV_ADDR)
 {
-//for gpio use
-wiringPiSetup();
-pinMode(PCA9955B_OEPIN,OUTPUT);
+gpioInitialise();
+gpioSetMode(PCA9955B_OEPIN,PI_OUTPUT);
 //i2c
 if ((file_i2c = open("/dev/i2c-1", O_RDWR)) < 0)
 	{
@@ -70,10 +69,10 @@ int PCA9955B::SetOutputEnable(uint8_t value)
 {
 if(value==0)
 	{
-	digitalWrite(PCA9955B_OEPIN,0);
+	gpioWrite(PCA9955B_OEPIN,0);
 	}
 else {
-	 digitalWrite(PCA9955B_OEPIN,1);
+	 gpioWrite(PCA9955B_OEPIN,1);
 	 }
 return PCA9955B_Base::Errors::Errors_NoError;
 }

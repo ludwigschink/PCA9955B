@@ -1,0 +1,28 @@
+\hypertarget{PCA9955B_8cpp}{}\doxysection{src/\+PCA9955B.cpp File Reference}
+\label{PCA9955B_8cpp}\index{src/PCA9955B.cpp@{src/PCA9955B.cpp}}
+
+
+This file contains the \mbox{\hyperlink{classPCA9955B}{PCA9955B}} class methods inherited from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}}.  
+
+
+{\ttfamily \#include \char`\"{}PCA9955\+B.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+Include dependency graph for PCA9955\+B.\+cpp\+:
+% FIG 0
+
+
+\doxysubsection{Detailed Description}
+This file contains the \mbox{\hyperlink{classPCA9955B}{PCA9955B}} class methods inherited from \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}}. 
+
+\mbox{\hyperlink{classPCA9955B}{PCA9955B}} PWM LED driver class
+
+\begin{DoxyVersion}{Version}
+0.\+7 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Ludwig Schink 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+04.\+03.\+2022 
+\end{DoxyDate}

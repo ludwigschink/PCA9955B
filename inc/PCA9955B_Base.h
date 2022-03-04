@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.h
- * 	@version	0.7
+ * 	@version	0.8
  * 	@author		Ludwig Schink
- * 	@date		09.12.2021
+ * 	@date		04.03.2022
  * 	@brief		This file contains the PCA9955B_Base class. Inherit from it, reimplement the virtual
  * 				functions and you can use the PCA9955B on every platform.*/
 
@@ -11,7 +11,7 @@
 #define PCA9955B_BASE_T_H
 
 /**	@brief	You can define a global Macro PCA9955B_DEBUG for getting i2c infos while sending and receiving.*/
-#define PCA9955B_DEBUG
+//#define PCA9955B_DEBUG
 
 #define PCA9955B_BUF_LEN 0x50	//50 registers
 
@@ -312,6 +312,9 @@ struct {
 class PCA9955B_Base
 {
 public:
+/**
+ * 	@brief	Constructor of PCA9955B_Base class.
+ * 	@param i2caddress:	Sets the i2c-address of this module. Must match with the address set by hardware.*/
 PCA9955B_Base(uint8_t i2c_address);
 ~PCA9955B_Base(void);
 

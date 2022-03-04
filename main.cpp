@@ -1,6 +1,6 @@
-/**	@mainpage 	PCA9955B multi purpose class
- *	@version	0.5
- *	@image 		html default.png*/
+/**	@mainpage 	PCA9955B, a multi platform C++ software module.
+ *	@version	0.7
+ *	@image 		html Logo.png*/
  
 #include <iostream>
 #include <cstring>
@@ -8,9 +8,9 @@
 
 /**		PCA9955B example program
  * 	@file		main.cpp
- * 	@version	0.6
+ * 	@version	0.7
  * 	@author		Ludwig Schink
- * 	@date		09.12.2021
+ * 	@date		04.03.2022
  * 	@brief		Entry point for program.*/
 int main(int argc, char **argv)
 {
@@ -48,7 +48,7 @@ std::cout << "Setting IREFALL register to 0xFE, press any key to coninue" << std
 getchar();
 PCA.WriteNonIncremental(PCA9955B::IREFALL,*((uint8_t*)&irefall));
 
-std::cout << "Setting LEDOUT0 register, press any key to continue" << std::endl;
+std::cout << "Setting PWM0-3 register, press any key to continue" << std::endl;
 getchar();
 PCA.SetPWM0(0x60);
 PCA.SetPWM1(0x30);

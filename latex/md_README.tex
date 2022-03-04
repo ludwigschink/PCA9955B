@@ -1,0 +1,18 @@
+A C++ class for universal using of \mbox{\hyperlink{classPCA9955B}{PCA9955B}} on multiple platforms.
+
+Using\+: The idea is to have a software module for universal using of the \mbox{\hyperlink{classPCA9955B}{PCA9955B}} LED driver. The hardware abstraction is ensured due providing an access method or function for the \mbox{\hyperlink{classPCA9955B}{PCA9955B}} class to access the i2c bus. Copy the files
+
+\mbox{\hyperlink{PCA9955B__Base_8h}{PCA9955\+B\+\_\+\+Base.\+h}} \mbox{\hyperlink{PCA9955B__Base_8cpp}{PCA9955\+B\+\_\+\+Base.\+cpp}}
+
+in your project directory and inherit from class \textquotesingle{}\mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}}\textquotesingle{}. Dont forget to pass the i2c-\/dev address (address only, without read/write bit) to the constructor of \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}} class. When inheriting, you provide the hardware access by declaring a method in the new class \textquotesingle{}i2cr\+RXTX\textquotesingle{} equal to the \textquotesingle{}i2c\+RXTX\textquotesingle{} method in the \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}} class, where its decalred \textquotesingle{}virtual\textquotesingle{}. By doing that, you overwrite that method and the \mbox{\hyperlink{classPCA9955B__Base}{PCA9955\+B\+\_\+\+Base}} class now uses that method.
+
+If not sure how to use it all, consider the files
+
+\mbox{\hyperlink{PCA9955B_8h}{PCA9955\+B.\+h}} \mbox{\hyperlink{PCA9955B_8cpp}{PCA9955\+B.\+cpp}}
+
+in this repository. They are created as an example and of course for testing this piece of software on a Raspberry Pi 3B+.
+
+\#\+Tested\+:
+\begin{DoxyItemize}
+\item on Raspberry Pi 3B+ 
+\end{DoxyItemize}

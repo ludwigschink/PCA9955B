@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.cpp
- * 	@version	0.7
+ * 	@version	0.8
  * 	@author		Ludwig Schink
- * 	@date		09.12.2021
+ * 	@date		04.03.2022
  * 	@brief		This file contains the PCA9955B_Base class method source.*/
 
 #include <cstring>
@@ -24,9 +24,9 @@ if(i2c_address<=0x7D)
 	}
 else {
 	 lasterror=Errors_IncombatibleI2CAddress;
-	 #ifdef PCA9955B_DEBUG
-	 std::cout << "ERR: invalid i2c device address";
-	 #endif
+		 #ifdef PCA9955B_DEBUG
+		 std::cout << "ERR: invalid i2c device address";
+		 #endif
 	 }
 }
 
@@ -86,12 +86,12 @@ for(int i=0;i<numtxbytes;i++)
 	{
 	buffer[2+i]=txdata[i];
 	}
-#ifdef PCA9955B_DEBUG
-for(int i=0;i<numtxbytes+2;i++)
-	{
-	std::cout << "buffer[" << i << "]=" << std::hex << (int)buffer[i] << std::endl;
-	}
-#endif
+	#ifdef PCA9955B_DEBUG
+	for(int i=0;i<numtxbytes+2;i++)
+		{
+		std::cout << "buffer[" << i << "]=" << std::hex << (int)buffer[i] << std::endl;
+		}
+	#endif
 int ret=i2cRXTX(i2c_dev_address,buffer,numtxbytes+2,i2c_write);
 if(ret<0)
 	{

@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver class
  * 	@file		PCA9955B.h
- * 	@version	0.6
+ * 	@version	0.7
  * 	@author		Ludwig Schink
- * 	@date		09.12.2021
+ * 	@date		04.03.2022
  * 	@brief		This file contains the PCA9955B class inherited from PCA9955B_Base. It reimplementes
  * 				the virtual methods from PCA9955B_Base for using on Raspberry pi 3B+. It is meant
  * 				as an example for inheriting and reimplementation your own methods.*/
@@ -13,7 +13,7 @@
 #define PCA9955B_DEBUG	//active debug output (for system with iostream support only)
 #define PCA9955B_DEV_ADDR 0x15
 
-#define PCA9955B_OEPIN 0 //wiringpi pin 0 -> GPIO17
+#define PCA9955B_OEPIN 18
 #define PCA9955B_OEPIN_DOWN 1
 #define PCA9955B_OEPIN_UP 0
 
@@ -23,7 +23,7 @@
 #include <fcntl.h>
 #include <iostream>
 #include <unistd.h>
-#include "wiringPi.h"
+#include "pigpio.h"
 
 #include "PCA9955B_Base.h"
 
