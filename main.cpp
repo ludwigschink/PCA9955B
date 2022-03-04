@@ -1,5 +1,5 @@
 /**	@mainpage 	PCA9955B, a multi platform C++ software module.
- *	@version	0.7
+ *	@version	0.8
  *	@image 		html Logo.png*/
  
 #include <iostream>
@@ -8,7 +8,7 @@
 
 /**		PCA9955B example program
  * 	@file		main.cpp
- * 	@version	0.7
+ * 	@version	0.8
  * 	@author		Ludwig Schink
  * 	@date		04.03.2022
  * 	@brief		Entry point for program.*/
