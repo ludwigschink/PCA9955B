@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.cpp
- * 	@version	0.8
+ * 	@version	0.9
  * 	@author		Ludwig Schink
- * 	@date		04.03.2022
+ * 	@date		07.03.2022
  * 	@brief		This file contains the PCA9955B_Base class method source.*/
 
 #include <cstring>

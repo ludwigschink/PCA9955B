@@ -1,8 +1,8 @@
 /**		PCA9955B PWM LED driver base class
  * 	@file		PCA9955B_Base.h
- * 	@version	0.8
+ * 	@version	0.9
  * 	@author		Ludwig Schink
- * 	@date		04.03.2022
+ * 	@date		07.03.2022
  * 	@brief		This file contains the PCA9955B_Base class. Inherit from it, reimplement the virtual
  * 				functions and you can use the PCA9955B on every platform.*/
 
@@ -435,19 +435,19 @@ virtual int i2cRXTX(int addr,uint8_t data[],int bytes,bool rxtx);
 virtual int SetOutputEnable(uint8_t value);
 
 
-/**		int i2cRXTX(uint8_t txbuf[],int bytes,bool rxtx)
+/**		int WriteIncremental(uint8_t reg_addr,uint8_t txdata[],int numtxbytes)
  * 	@brief	Declared virtual for overriding by inheriting this class
  * 			You must provide this funtion to access the HW i2c controller.
- * 	@param [uint8_t] txbuf:	txdata to send or fill when receive
- * 	@param [int]		bytes:	number bytes to send
- * 	@param [bool]	rxtx:	read or write*/
+ * 	@param [uint8_t] txdata:	TX buffer containing bytes to send.
+ * 	@param [int]	 numtxbytes:Number of bytes to send*/
 int WriteIncremental(uint8_t reg_addr,uint8_t txdata[],int numtxbytes);
 
 /**	int SendNonIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
  * 	@brief	Sends data to the device and increments register address
  * 			with every byte writed.
  * 	@param [uint8_t]	reg_addr:	device register address
- * 	@param [uint8_t*]	txdata:		buffer holding bytes to be sended.*/
+ * 	@param [uint8_t*]	txdata:		buffer holding bytes to be sended.
+ * 	@return	[int]		Number of bytes written when succeeded. Return <0 when failure.*/
 int WriteNonIncremental(uint8_t reg_addr,uint8_t txbyte); 
 
 /**	int ReadIncremental(uint8_t reg_addr,uint8_t txdata[],int numbytes)
