@@ -12,9 +12,9 @@ PCA9955B_Base.cpp <br>
 
 in your project directory. 
 
-## Using
+## general Using
 Create a new class and inherit from class 'PCA9955B_Base'.
-Dont forget to pass the i2c-dev address (address only, without read/write bit)
+Dont forget to pass the i2c-slave address (address only, without read/write bit)
 to the constructor of PCA9955B_Base class. When inheriting, you provide the hardware access by declaring
 a method in the new class 'i2crRXTX' equal to the 'i2cRXTX' method in the PCA9955B_Base class, where its
 declared 'virtual'. By doing that, you overwrite that method and the PCA9955B_Base class now uses that
