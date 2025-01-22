@@ -23,7 +23,7 @@ method.<br>
 Important: - You may have to kill all pigpiod deamons, because it prevents pigpio to be initialized.<br>
 		   - because of the pigpio library, you have to run it with sudo rights.<br>
 
-If not sure how to use it all, consider the files
+If not sure how to use it all, consider the files from branch C++.
 
 PCA9955B.h <br>
 PCA9955B.cpp <br>
